@@ -77,7 +77,7 @@ in
     yabai = {
       enable = true;
       package = pkgs.yabai;
-      extraConfig = "/Users/luke.collins/.config/yabai/yabairc";
+      extraConfig = "/Users/lukecollins/.config/yabai/yabairc";
     };
 
     # Enable skhd
@@ -131,6 +131,8 @@ in
         wvous-tr-corner = 1; # Top right corner
         wvous-bl-corner = 1; # Bottom left corner
         wvous-br-corner = 1; # Bottom right corner
+        autohide = true;
+        autohide-delay = 86400.0;
       };
     };
     activationScripts.extraActivation.text = ''

@@ -43,7 +43,7 @@ in
     stateVersion = "23.11"; # Make sure this matches the Nixpkgs version you are using
 
     # Set the file locations for the configuration files
-    file.".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
+    file.".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty/alacritty.toml;
     file.".config/yabai/yabairc".source = ./dotfiles/yabai/yabairc;
     file.".skhdrc".source = ./dotfiles/.skhdrc;
     file.".simplebarrc".source = ./dotfiles/.simplebarrc;

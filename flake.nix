@@ -10,18 +10,18 @@
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }: {
-    darwinConfigurations."OVO-VHG17X6V24" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."Lukes-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         ./darwin-configuration.nix #
         {
-        users.users."luke.collins".home = "/Users/luke.collins";
+        users.users."lukecollins".home = "/Users/lukecollins";
         }
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users."luke.collins" = import ./home.nix;
+          home-manager.users."lukecollins" = import ./home.nix;
         }
       ];
     };
