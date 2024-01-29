@@ -47,7 +47,7 @@ in
         epkgs.markdown-mode epkgs.grip-mode epkgs.dash epkgs.s epkgs.editorconfig
         epkgs.autothemer epkgs.rust-mode epkgs.lsp-mode epkgs.modus-themes
         epkgs.dashboard epkgs.direnv epkgs.projectile epkgs.nerd-icons
-        epkgs.doom-modeline epkgs.grip-mode epkgs.company epkgs.elfeed
+        epkgs.doom-modeline epkgs.grip-mode epkgs.company epkgs.elfeed epkgs.elfeed-protocol
       ];
     })
   ];

@@ -229,33 +229,18 @@
       ;; If there's an error, print a message (you can also log or take other actions)
       (error (message "Failed to load copilot: %s" err)))))
 
-;; Elfeed configuration
-(use-package elfeed
-  :ensure t)
+;;Configure elfeed
+(use-package elfeed)
 
-(setq elfeed-feeds
-      '("https://news.ycombinator.com/rss"
-        "http://www.theverge.com/rss/index.xml"
-        "https://feeds.arstechnica.com/arstechnica/index"
-        "https://www.theregister.com/headlines.atom"
-        "https://www.phoronix.com/phoronix-rss.php"
-        "https://www.wired.com/feed/rss"
-        "http://rss.slashdot.org/Slashdot/slashdotMain"
-        "https://appleinsider.com/rss/news"
-        "https://www.engadget.com/rss.xml"
-        "https://daringfireball.net/feeds/main"
-        "https://lwn.net/headlines/rss"
-        "https://techcrunch.com/feed/"
-        "https://www.bleepingcomputer.com/feed/"
-        "https://www.techradar.com/uk/feeds.xml"
-        "http://feeds.feedburner.com/servethehome"))
-
-;; Update elfeed feeds on start
-(defun update-elfeed-feeds-on-start ()
-  (elfeed-update))
-
-;; Add hook to update elfeed feeds on start
-(add-hook 'elfeed-search-mode-hook 'update-elfeed-feeds-on-start)
+(use-package elfeed-protocol
+  :ensure t
+  :config
+  (elfeed-protocol-enable)
+  (setq elfeed-protocol-feeds '(("ttrss+http://rearrange5473@192.168.0.3:8280"
+                                 :password "32Y3TzPtHHKbUc")))
+  :custom
+  (setq elfeed-protocol-ttrss-maxsize 200) ; bigger than 200 is invalid
+  (setq elfeed-protocol-ttrss-fetch-category-as-tag t))
 
 ;;; Language Configuration ;;;
 ;;----------------------------;;

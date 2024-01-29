@@ -47,6 +47,12 @@ yabai -m rule --add app="^Finder$" manage=off
 # Disable window management for Activity Monitor
 yabai -m rule --add app="^zoom.us$" manage=off
 
+# Disable window management for Installer
+yabai -m rule --add app="^Installer$" manage=off
+
+# Disable window management for NordVPN
+yabai -m rule --add app="^NordVPN$" manage=off
+
 # Wait 10 seconds for yabai to load
 sleep 10
 
