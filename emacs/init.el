@@ -230,7 +230,12 @@
       (error (message "Failed to load copilot: %s" err)))))
 
 ;;Configure elfeed
-(use-package elfeed)
+(use-package elfeed
+  :config
+  (setq elfeed-search-title-max-width 140)
+  (add-hook 'elfeed-search-mode-hook (lambda ()
+                                       (setq-local elfeed-search-title-max-width 140)
+                                       (elfeed-search-update :force))))
 
 (use-package elfeed-protocol
   :ensure t
