@@ -118,19 +118,23 @@
 
   ;; Dashboard appearance settings
   (setq dashboard-banner-logo-title "Allied Mastercomputer")
-  (setq dashboard-startup-banner "~/Pictures/gnu_color.png") ; Set the banner image
-  (setq dashboard-center-content t) ; Center the content
+  (setq dashboard-startup-banner "~/Pictures/gnu_color.png")  ; Set the banner image
+  (setq dashboard-center-content t)  ; Center the content
   (setq dashboard-display-icons-p t)
   (setq dashboard-icon-type 'nerd-icons)
   (setq dashboard-set-file-icons t)
 
   ;; Dashboard items to display
   (setq dashboard-items '((recents  . 5)
-                          (projects . 5)))
+                          (projects . 5)
+                          (agenda   . 5)))  ; Added agenda
 
   ;; Modify heading icons for certain dashboard items
   (dashboard-modify-heading-icons '((recents . "file-text")
                                     (bookmarks . "book")))
+
+;; Set Org agenda files
+  (setq org-agenda-files '("~/Documents/owncloud-org/"))
 
   ;; Set the footer message
   (setq dashboard-footer-messages '("I have no mouth, and I must scream")))
