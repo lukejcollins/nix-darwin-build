@@ -253,9 +253,9 @@
 ;; Configure elfeed
 (use-package elfeed
   :config
-  (setq elfeed-search-title-max-width 140)
+  (setq elfeed-search-title-max-width 180)
   (add-hook 'elfeed-search-mode-hook (lambda ()
-                                       (setq-local elfeed-search-title-max-width 140)
+                                       (setq-local elfeed-search-title-max-width 180)
                                        (elfeed-search-update :force)
                                        ;; Call the check function after force update
                                        (my-elfeed-update-and-check))))
