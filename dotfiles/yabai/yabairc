@@ -53,6 +53,9 @@ yabai -m rule --add app="^Installer$" manage=off
 # Disable window management for NordVPN
 yabai -m rule --add app="^NordVPN$" manage=off
 
+# Disable window management for UTM
+yabai -m rule --add app="^UTM$" manage=off
+
 # Wait 10 seconds for yabai to load
 sleep 10
 
