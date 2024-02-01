@@ -233,36 +233,14 @@
       ;; If there's an error, print a message (you can also log or take other actions)
       (error (message "Failed to load copilot: %s" err)))))
 
-;; Define the function that will be added to the elfeed-update-finished-hook
-(defun my-elfeed-post-update-check ()
-  "Check if new entries have been added after update."
-  ;; Remove this hook immediately to prevent it from running again.
-  (remove-hook 'elfeed-update-finished-hook 'my-elfeed-post-update-check)
-  ;; Check if new entries have been added.
-  (let ((new-entries-count (elfeed-db-last-update))
-        (pre-update-count (elfeed-db-last-update-time)))
-    (unless (> new-entries-count pre-update-count)
-      ;; No new entries found, you can add code here to notify you or take other actions.
-      (message "No new Elfeed entries were added."))))
-
-;; Define the update function that hooks into elfeed-update-finished-hook
-(defun my-elfeed-update-and-check ()
-  "Update Elfeed and stop updating if no new entries are found."
-  (interactive)
-  ;; Add a one-time hook to run after update finishes.
-  (add-hook 'elfeed-update-finished-hook 'my-elfeed-post-update-check)
-  ;; Perform the update.
-  (elfeed-update))
-
 ;; Configure elfeed
 (use-package elfeed
   :config
+  (global-set-key (kbd "M-A") 'elfeed-update)
   (setq elfeed-search-title-max-width 180)
   (add-hook 'elfeed-search-mode-hook (lambda ()
                                        (setq-local elfeed-search-title-max-width 180)
-                                       (elfeed-search-update :force)
-                                       ;; Call the check function after force update
-                                       (my-elfeed-update-and-check))))
+                                       (elfeed-search-update :force))))
 
 (use-package elfeed-protocol
   :ensure t
