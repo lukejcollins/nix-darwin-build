@@ -29,7 +29,7 @@ in
   
   # Install packages
   environment.systemPackages = with pkgs; [
-    vim git gh alacritty wget docker nodejs python3 python3Packages.pip vscode
+    vim git gh alacritty wget docker nodejs python3 python3Packages.pip
     shfmt postgresql docker-compose tailscale uebersicht gcc direnv neofetch colima
     raycast python3Packages.python-lsp-server rnix-lsp nodePackages.bash-language-server zoom-us
     dockerfile-language-server-nodejs terraform-ls clippy awscli2 typst utm
@@ -50,6 +50,12 @@ in
         epkgs.doom-modeline epkgs.grip-mode epkgs.company epkgs.elfeed epkgs.elfeed-protocol
       ];
     })
+    # (vscode-with-extensions.override {
+    #  vscodeExtensions = with vscode-extensions; [
+    #    github.copilot
+    #    github.copilot-chat
+    #  ];
+    #})
   ];
  
   # Install fonts

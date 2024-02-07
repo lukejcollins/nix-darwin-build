@@ -65,10 +65,10 @@
 (setq mac-command-modifier 'super)
 
 ;; Copy
-(global-set-key (kbd "s-c") 'kill-ring-save)
+(global-set-key (kbd "s-c") 'clipboard-kill-ring-save)
 
 ;; Paste
-(global-set-key (kbd "s-v") 'yank)
+(global-set-key (kbd "s-v") 'clipboard-yank)
 
 ;; Cut
 (global-set-key (kbd "s-x") 'kill-region)
@@ -84,6 +84,9 @@
 
 ;; Select All
 (global-set-key (kbd "s-a") 'mark-whole-buffer)
+
+;; Paste replaces selected regio
+(delete-selection-mode 1)
 
 ;; Path configuration
 (let ((paths '("/Users/luke.collins/.nix-profile/bin"
