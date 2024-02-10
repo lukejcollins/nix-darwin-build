@@ -50,6 +50,7 @@ in
     file.".zshrc".source = ./dotfiles/.zshrc;
     file.".p10k.zsh".source = ./dotfiles/.p10k.zsh;
     file.".config/direnv/direnvrc".source = ./dotfiles/direnv/direnvrc;
+    file.".config/zellij/config.kdl".source = ./dotfiles/zellij/config.kdl;
     file."Library/Application Support/Übersicht/widgets/simple-bar".source = simpleBarWidget;
     file."/powerlevel10k".source = powerlevel10kSrc;
     file.".emacsCopilot".source = emacsCopilotSrc;
