@@ -29,10 +29,10 @@ in
   
   # Install packages
   environment.systemPackages = with pkgs; [
-    vim git gh alacritty wget docker nodejs python3 python3Packages.pip zellij
+    vim git gh alacritty wget docker nodejs python3 python3Packages.pip zellij pet
     shfmt postgresql docker-compose tailscale uebersicht gcc direnv neofetch colima
     raycast python3Packages.python-lsp-server rnix-lsp nodePackages.bash-language-server zoom-us
-    dockerfile-language-server-nodejs terraform-ls clippy awscli2 typst utm
+    dockerfile-language-server-nodejs terraform-ls clippy awscli2 typst utm fzf
     # Install emacs with packages
     (emacsWithPackagesFromUsePackage {
       config = ./emacs/init.el;

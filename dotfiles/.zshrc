@@ -26,5 +26,8 @@ alias flake-build='darwin-rebuild switch --flake ~/git/nix-darwin-build'
 # nix clean alias
 alias nix-clean='nix-collect-garbage -d'
 
+# pet alias
+alias snip='pet search'
+
 # direnv hook
 eval "$(direnv hook zsh)"
