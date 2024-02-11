@@ -32,7 +32,7 @@ in
     vim git gh alacritty wget docker nodejs python3 python3Packages.pip zellij pet
     shfmt postgresql docker-compose tailscale uebersicht gcc direnv neofetch colima
     raycast python3Packages.python-lsp-server rnix-lsp nodePackages.bash-language-server
-    dockerfile-language-server-nodejs terraform-ls clippy awscli2 typst utm fzf
+    dockerfile-language-server-nodejs terraform-ls clippy awscli2 typst utm fzf spotify
     # Install emacs with packages
     (emacsWithPackagesFromUsePackage {
       config = ./emacs/init.el;
