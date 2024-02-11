@@ -15,7 +15,9 @@
 ;;----------------------------;;
 
 ;; Load theme
-(load-theme 'modus-vivendi)
+(load-theme 'catppuccin :no-confirm)
+(setq catppuccin-flavor 'mocha)
+(catppuccin-reload)
 
 ;;Remove tool bar
 (tool-bar-mode -1)
