@@ -48,7 +48,7 @@ in
         epkgs.autothemer epkgs.rust-mode epkgs.lsp-mode epkgs.modus-themes
         epkgs.dashboard epkgs.direnv epkgs.projectile epkgs.nerd-icons
         epkgs.doom-modeline epkgs.grip-mode epkgs.company epkgs.elfeed epkgs.elfeed-protocol
-        epkgs.catppuccin-theme
+        epkgs.catppuccin-theme epkgs.codeium
       ];
     })
     # (vscode-with-extensions.override {
