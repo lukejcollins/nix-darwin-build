@@ -330,8 +330,8 @@
   :config
     (setq lsp-rust-analyzer-cargo-watch-command "clippy")
     (setq lsp-rust-analyzer-server-display-inlay-hints t)
-    (setq lsp-completion-enable nil)
-    (setq lsp-diagnostic-package :none))
+    (setq lsp-diagnostic-package :auto-configure)
+    (setq lsp-diagnostics-provider :auto))
 
 ;; LSP UI
 (use-package lsp-ui
