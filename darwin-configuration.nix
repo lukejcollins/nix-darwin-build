@@ -31,8 +31,9 @@ in
   environment.systemPackages = with pkgs; [
     vim git gh alacritty wget docker nodejs python3 python3Packages.pip zellij pet
     shfmt postgresql docker-compose tailscale uebersicht gcc direnv neofetch colima
-    raycast python3Packages.python-lsp-server rnix-lsp nodePackages.bash-language-server
+    raycast nodePackages.pyright nil nodePackages.bash-language-server
     dockerfile-language-server-nodejs terraform-ls clippy awscli2 typst utm fzf spotify
+    yaml-language-server
     # Install emacs with packages
     (emacsWithPackagesFromUsePackage {
       config = ./emacs/init.el;
@@ -48,7 +49,7 @@ in
         epkgs.autothemer epkgs.rust-mode epkgs.lsp-mode epkgs.modus-themes
         epkgs.dashboard epkgs.direnv epkgs.projectile epkgs.nerd-icons
         epkgs.doom-modeline epkgs.grip-mode epkgs.company epkgs.elfeed epkgs.elfeed-protocol
-        epkgs.catppuccin-theme epkgs.codeium epkgs.flycheck
+        epkgs.catppuccin-theme epkgs.codeium epkgs.yaml-mode epkgs.flycheck epkgs.lsp-pyright
       ];
     })
   ];
