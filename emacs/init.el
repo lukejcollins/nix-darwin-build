@@ -91,8 +91,8 @@
 (delete-selection-mode 1)
 
 ;; Path configuration
-(let ((paths '("/Users/luke.collins/.nix-profile/bin"
-               "/etc/profiles/per-user/luke.collins/bin"
+(let ((paths '("/Users/lukecollins/.nix-profile/bin"
+               "/etc/profiles/per-user/lukecollins/bin"
                "/run/current-system/sw/bin"
                "/nix/var/nix/profiles/default/bin"
                "/usr/local/bin"
@@ -312,6 +312,11 @@
   :ensure t
   :hook ((markdown-mode . grip-mode)))
 
+;; Enable Flycheck
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
 ;; LSP Mode
 (use-package lsp-mode
   :ensure t
@@ -325,7 +330,8 @@
   :config
     (setq lsp-rust-analyzer-cargo-watch-command "clippy")
     (setq lsp-rust-analyzer-server-display-inlay-hints t)
-    (setq lsp-completion-enable nil))
+    (setq lsp-completion-enable nil)
+    (setq lsp-diagnostic-package :none))
 
 ;; LSP UI
 (use-package lsp-ui
