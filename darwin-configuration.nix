@@ -51,12 +51,6 @@ in
         epkgs.catppuccin-theme epkgs.codeium
       ];
     })
-    # (vscode-with-extensions.override {
-    #  vscodeExtensions = with vscode-extensions; [
-    #    github.copilot
-    #    github.copilot-chat
-    #  ];
-    #})
   ];
  
   # Install fonts
