@@ -63,8 +63,8 @@ in
   # Add emacs overlay
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/emacs-overlay/archive/d194712b55853051456bc47f39facc39d03cbc40.tar.gz";
-      sha256 = "sha256:08akyd7lvjrdl23vxnn9ql9snbn25g91pd4hn3f150m79p23lrrs";
+      url = "https://github.com/nix-community/emacs-overlay/archive/62004f5ead76e154c4f19e27a94cd24fb4db59aa.tar.gz";
+      sha256 = "sha256:1050ski9z835q6h810fvyshb44d442jphf2wigj5gzjgfda65s6y";
     }))
   ];
 

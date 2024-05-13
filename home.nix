@@ -5,7 +5,7 @@ let
   simpleBarWidget = pkgs.fetchFromGitHub {
     owner = "lukejcollins";
     repo = "simple-bar";
-    rev = "b275b7499861590437faada2aff1a75e2a183945";
+    rev = "a002288f75f45acff76971dcaeea6de9f6fec081";
     sha256 = "sha256-IlURi4lcLUHdzH/N3wN06oFMGJstFSqDjgRHCp3h6WQ="; # Replace with the actual SHA
   };
 
@@ -17,7 +17,7 @@ let
   # Powerlevel10k Installation Definition
   powerlevel10kSrc = builtins.fetchGit {
     url = "https://github.com/romkatv/powerlevel10k.git";
-    rev = "017395a266aa15011c09e64e44a1c98ed91c478c";
+    rev = "35833ea15f14b71dbcebc7e54c104d8d56ca5268";
   };
 
 in
