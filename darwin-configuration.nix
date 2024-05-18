@@ -78,7 +78,9 @@ in
     # Enable yabai
     yabai = {
       enable = true;
-      package = pkgs.yabai;
+      package = pkgs.yabai.overrideAttrs (oldAttrs: {
+        version = "7.1.1";
+      });
       extraConfig = "/Users/lukecollins/.config/yabai/yabairc";
     };
 
