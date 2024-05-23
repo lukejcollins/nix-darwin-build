@@ -33,7 +33,7 @@ in
     shfmt postgresql docker-compose tailscale uebersicht gcc direnv neofetch colima
     raycast nodePackages.pyright nil nodePackages.bash-language-server
     dockerfile-language-server-nodejs terraform-ls clippy awscli2 typst utm fzf spotify
-    yaml-language-server qbittorrent keka
+    yaml-language-server qbittorrent keka kubectl
     # Install emacs with packages
     (emacsWithPackagesFromUsePackage {
       config = ./emacs/init.el;
