@@ -33,7 +33,7 @@ in
     shfmt postgresql docker-compose tailscale uebersicht gcc direnv neofetch colima
     raycast nodePackages.pyright nil nodePackages.bash-language-server
     dockerfile-language-server-nodejs terraform-ls clippy awscli2 typst utm fzf spotify
-    yaml-language-server qbittorrent keka kubectl
+    yaml-language-server qbittorrent keka kubectl minikube
     # Install emacs with packages
     (emacsWithPackagesFromUsePackage {
       config = ./emacs/init.el;
@@ -78,9 +78,7 @@ in
     # Enable yabai
     yabai = {
       enable = true;
-      package = pkgs.yabai.overrideAttrs (oldAttrs: {
-        version = "7.1.1";
-      });
+      package = pkgs.yabai;
       extraConfig = "/Users/lukecollins/.config/yabai/yabairc";
     };
 
