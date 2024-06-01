@@ -44,11 +44,11 @@ in
       extraEmacsPackages = epkgs: [
         epkgs.use-package epkgs.terraform-mode epkgs.flycheck epkgs.flycheck-inline
         epkgs.dockerfile-mode epkgs.nix-mode epkgs.treemacs epkgs.markdown-mode
-        epkgs.treemacs-all-the-icons epkgs.modus-themes epkgs.helm epkgs.vterm
-        epkgs.markdown-mode epkgs.grip-mode epkgs.dash epkgs.s epkgs.editorconfig
-        epkgs.autothemer epkgs.rust-mode epkgs.lsp-mode epkgs.modus-themes
-        epkgs.dashboard epkgs.direnv epkgs.projectile epkgs.nerd-icons
-        epkgs.doom-modeline epkgs.grip-mode epkgs.company epkgs.elfeed epkgs.elfeed-protocol
+        epkgs.treemacs-all-the-icons epkgs.helm epkgs.vterm epkgs.markdown-mode
+        epkgs.grip-mode epkgs.dash epkgs.s epkgs.editorconfig
+        epkgs.autothemer epkgs.rust-mode epkgs.lsp-mode epkgs.dashboard
+        epkgs.direnv epkgs.projectile epkgs.nerd-icons epkgs.doom-modeline
+        epkgs.grip-mode epkgs.company epkgs.elfeed epkgs.elfeed-protocol
         epkgs.catppuccin-theme epkgs.codeium epkgs.yaml-mode epkgs.flycheck epkgs.lsp-pyright
       ];
     })

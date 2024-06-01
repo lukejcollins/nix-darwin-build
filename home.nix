@@ -6,7 +6,7 @@ let
     owner = "lukejcollins";
     repo = "simple-bar";
     rev = "a002288f75f45acff76971dcaeea6de9f6fec081";
-    sha256 = "sha256-IlURi4lcLUHdzH/N3wN06oFMGJstFSqDjgRHCp3h6WQ="; # Replace with the actual SHA
+    sha256 = "sha256-IlURi4lcLUHdzH/N3wN06oFMGJstFSqDjgRHCp3h6WQ=";
   };
 
   # Python Environment Definition
@@ -29,7 +29,7 @@ in
       EDITOR = "vim";
     };
 
-    packages = with pkgs; [
+    packages = [
       myPythonEnv
     ];
 

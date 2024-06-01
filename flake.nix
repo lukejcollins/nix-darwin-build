@@ -9,7 +9,7 @@
     nix-darwin.inputs.home-manager.follows = "home-manager";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }: {
+  outputs = { self, nix-darwin, nixpkgs, home-manager }: {
     darwinConfigurations."Lukes-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
