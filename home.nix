@@ -5,7 +5,7 @@ let
   simpleBarWidget = pkgs.fetchFromGitHub {
     owner = "lukejcollins";
     repo = "simple-bar";
-    rev = "a002288f75f45acff76971dcaeea6de9f6fec081";
+    rev = "de63332fdda773a3051cd7cd759179300764ef42";
     sha256 = "sha256-IlURi4lcLUHdzH/N3wN06oFMGJstFSqDjgRHCp3h6WQ=";
   };
 
