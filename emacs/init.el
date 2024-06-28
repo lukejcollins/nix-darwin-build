@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t -*-;;
+;; -*- lexical-binding: t -*-
 ;;; init.el --- Summary
 ;; This is my Emacs initialization file which configures Emacs to my liking.
 
@@ -10,16 +10,24 @@
 
 (require 'use-package)
 
+;; Increase the garbage collection threshold during startup
+(setq gc-cons-threshold most-positive-fixnum)
+
+;; Reset the garbage collection threshold after startup
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold 800000)))
 
 ;;; Appearance Configuration ;;;
 ;;----------------------------;;
 
 ;; Load theme
-(load-theme 'catppuccin :no-confirm)
-(setq catppuccin-flavor 'mocha)
-(catppuccin-reload)
+(use-package catppuccin-theme
+  :ensure t
+  :init
+  (setq catppuccin-flavor 'mocha)
+  (load-theme 'catppuccin :no-confirm))
 
-;;Remove tool bar
+;; Remove tool bar
 (tool-bar-mode -1)
 
 ;; Menu bar mode
@@ -41,7 +49,7 @@
 
 ;; Clipboard Configuration
 (setq select-enable-clipboard t
-            select-enable-primary t)
+      select-enable-primary t)
 
 ;; Disable backup files
 (setq make-backup-files nil)
@@ -87,7 +95,7 @@
 ;; Select All
 (global-set-key (kbd "s-a") 'mark-whole-buffer)
 
-;; Paste replaces selected regio
+;; Paste replaces selected region
 (delete-selection-mode 1)
 
 ;; Path configuration
@@ -100,11 +108,7 @@
                "/usr/sbin"
                "/bin"
                "/sbin")))
-
-  ;; Set the environment variable PATH
   (setenv "PATH" (string-join paths ":"))
-
-  ;; Set exec-path in Emacs
   (setq exec-path (append paths exec-path)))
 
 ;; Introduce backtab functionality for unindent
@@ -115,14 +119,12 @@
         (target-indentation 0)
         (searching t))
     (save-excursion
-      ;; Loop to search upwards for a line with lesser indentation.
-      (while (and searching (not (bobp))) ;; bobp checks if beginning of buffer is reached.
+      (while (and searching (not (bobp)))
         (forward-line -1)
         (let ((previous-line-indentation (current-indentation)))
           (when (< previous-line-indentation current-indentation)
             (setq target-indentation previous-line-indentation)
             (setq searching nil)))))
-    ;; Only unindent if a target indentation level was found.
     (when (and (not searching) (> current-indentation target-indentation))
       (indent-line-to target-indentation))))
 
@@ -135,116 +137,92 @@
 ;; Dashboard configuration
 (use-package dashboard
   :ensure t
-  :config
-  ;; Set the initial buffer choice to Dashboard
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-
-  ;; Set up the Dashboard
-  (dashboard-setup-startup-hook)
-
-  ;; Dashboard appearance settings
-  (setq dashboard-banner-logo-title "Allied Mastercomputer")
-  (setq dashboard-startup-banner "~/Pictures/gnu_color.png")  ; Set the banner image
-  (setq dashboard-center-content t)  ; Center the content
-  (setq dashboard-display-icons-p t)
-  (setq dashboard-icon-type 'nerd-icons)
-  (setq dashboard-set-file-icons t)
-
-  ;; Dashboard items to display
-  (setq dashboard-items '((recents  . 5)
+  :init
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
+        dashboard-banner-logo-title "Allied Mastercomputer"
+        dashboard-startup-banner "~/Pictures/gnu_color.png"
+        dashboard-center-content t
+        dashboard-display-icons-p t
+        dashboard-icon-type 'nerd-icons
+        dashboard-set-file-icons t
+        dashboard-items '((recents  . 5)
                           (projects . 5)
-                          (agenda   . 5)))  ; Added agenda
-
-  ;; Modify heading icons for certain dashboard items
-  (dashboard-modify-heading-icons '((recents . "file-text")
-                                    (bookmarks . "book")))
-
-;; Set Org agenda files
-  (setq org-agenda-files '("~/Documents/owncloud-org/"))
-
-  ;; Set the footer message
-  (setq dashboard-footer-messages '("I have no mouth, and I must scream")))
+                          (agenda   . 5))
+        dashboard-footer-messages '("I have no mouth, and I must scream"))
+  :config
+  (dashboard-setup-startup-hook)
+  (setq org-agenda-files '("~/Documents/owncloud-org/")))
 
 (use-package nerd-icons
   :ensure t
-  :custom
-  ;; The Nerd Font you want to use in GUI
-  ;; "Symbols Nerd Font Mono" is the default and is recommended
-  ;; but you can use any other Nerd Font if you want
-  (nerd-icons-font-family "Symbols Nerd Font Mono"))
+  :custom (nerd-icons-font-family "Symbols Nerd Font Mono"))
 
 ;; Projectile configuration
 (use-package projectile
   :ensure t
+  :defer t
   :config
   (projectile-mode +1))
 
 ;; Direnv configuration
 (use-package direnv
   :ensure t
+  :defer t
   :config
   (direnv-mode))
 
 ;; Helm configuration
 (use-package helm
   :ensure t
+  :defer t
+  :init
+  (setq helm-M-x-fuzzy-match t
+        helm-buffers-fuzzy-matching t
+        helm-recentf-fuzzy-match t
+        helm-locate-fuzzy-match t
+        helm-semantic-fuzzy-match t
+        helm-imenu-fuzzy-match t
+        helm-completion-in-region-fuzzy-match t)
+  :bind (("M-x" . helm-M-x))
   :config
-  (helm-mode 1)
-
-  ;; Enable fuzzy matching
-  (setq helm-M-x-fuzzy-match t) ;; Fuzzy matching for M-x
-  (setq helm-buffers-fuzzy-matching t) ;; Fuzzy matching for buffer-related tasks
-  (setq helm-recentf-fuzzy-match t) ;; Fuzzy matching for recent files
-  (setq helm-locate-fuzzy-match t) ;; Fuzzy matching for locate command
-  (setq helm-semantic-fuzzy-match t) ;; Fuzzy matching for semantic sources
-  (setq helm-imenu-fuzzy-match t) ;; Fuzzy matching for imenu
-  (setq helm-completion-in-region-fuzzy-match t) ;; Fuzzy matching for in-region completion
-
-  :bind (("M-x" . helm-M-x)
-         ;; You can add more keybindings here if needed
-        ))
+  (helm-mode 1))
 
 ;; Configure company
 (use-package company
-    :ensure t
-    :defer 0.1
-    :config
-    (global-company-mode t)
-    (setq-default
-        company-idle-delay 0.05
-        company-require-match nil
-        company-minimum-prefix-length 0
-
-        ;; get only preview
-        company-frontends '(company-preview-frontend)
-        ;; also get a drop down
-        ;; company-frontends '(company-pseudo-tooltip-frontend company-preview-frontend)
-        ))
+  :ensure t
+  :defer t
+  :config
+  (global-company-mode t)
+  (setq-default company-idle-delay 0.05
+                company-require-match nil
+                company-minimum-prefix-length 0
+                company-frontends '(company-preview-frontend)))
 
 ;; Configure codeium
 (use-package codeium
-    :ensure t
-    :init
-    (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
-    :config
-    (setq use-dialog-box nil) ;; do not use popup boxes
-    (setq codeium-mode-line-enable
-        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
-    (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
-    (setq codeium-api-enabled
-        (lambda (api)
-            (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
-    (defun my-codeium/document/text ()
-        (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
-    (defun my-codeium/document/cursor_offset ()
-        (codeium-utf8-byte-length
-            (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
-    (setq codeium/document/text 'my-codeium/document/text)
-    (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
+  :ensure t
+  :defer t
+  :init
+  (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
+  :config
+  (setq use-dialog-box nil
+        codeium-mode-line-enable
+        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion))))
+        codeium-api-enabled
+        (lambda (api) (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
+  (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
+  (defun my-codeium/document/text ()
+    (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
+  (defun my-codeium/document/cursor_offset ()
+    (codeium-utf8-byte-length
+     (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
+  (setq codeium/document/text 'my-codeium/document/text)
+  (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
 
 ;; Treemacs configuration
 (use-package treemacs
   :ensure t
+  :defer t
   :bind (("C-x t" . treemacs)))
 
 (use-package treemacs-nerd-icons
@@ -257,46 +235,45 @@
   (interactive)
   (let ((path (read-directory-name "Project root: "))
         (name (read-string "Project name: ")))
-    ;; Ensure the path is valid
-    (when (and (file-directory-p path)
-               (file-exists-p path))
-      ;; Add project to workspace
+    (when (and (file-directory-p path) (file-exists-p path))
       (treemacs-do-add-project-to-workspace path name))))
 
 (with-eval-after-load 'treemacs
   (define-key treemacs-mode-map (kbd "A a") #'my-treemacs-add-project-with-name))
 
-
 ;; Enable grip-mode
 (use-package grip-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 
 ;; Vterm configuration
 (use-package vterm
   :ensure t
+  :defer t
   :config
   (setq vterm-max-scrollback 5000))
 
-
-
 ;; Configure elfeed
 (use-package elfeed
+  :ensure t
+  :defer t
   :config
   (global-set-key (kbd "M-A") 'elfeed-update)
   (setq elfeed-search-title-max-width 180)
-  (add-hook 'elfeed-search-mode-hook (lambda ()
-                                       (setq-local elfeed-search-title-max-width 180)
-                                       (elfeed-search-update :force))))
+  (add-hook 'elfeed-search-mode-hook
+            (lambda ()
+              (setq-local elfeed-search-title-max-width 180)
+              (elfeed-search-update :force))))
 
 (use-package elfeed-protocol
   :ensure t
+  :after elfeed
   :config
   (elfeed-protocol-enable)
-  (setq elfeed-protocol-feeds '(("ttrss+http://rearrange5473@192.168.0.3:8280"
-                                 :password "32Y3TzPtHHKbUc")))
+  (setq elfeed-protocol-feeds '(("ttrss+http://rearrange5473@192.168.0.3:8280" :password "32Y3TzPtHHKbUc")))
   :custom
-  (setq elfeed-protocol-ttrss-maxsize 200) ;; Bigger than 200 is invalid
-  (setq elfeed-protocol-ttrss-fetch-category-as-tag t))
+  (setq elfeed-protocol-ttrss-maxsize 200
+        elfeed-protocol-ttrss-fetch-category-as-tag t))
 
 ;;; Language Configuration ;;;
 ;;----------------------------;;
@@ -311,34 +288,47 @@
 ;; Modes for various file types
 (use-package terraform-mode
   :ensure t
-  :mode ("\\.tf\\'" . terraform-mode))
+  :defer t
+  :mode "\\.tf\\'")
+
 (use-package dockerfile-mode
   :ensure t
+  :defer t
   :mode ("Dockerfile\\'" . dockerfile-mode)
         ("\\.dockerfile\\'" . dockerfile-mode))
+
 (use-package nix-mode
   :ensure t
+  :defer t
   :mode "\\.nix\\'")
+
 (use-package rust-mode
   :ensure t
+  :defer t
   :mode "\\.rs\\'")
+
 (use-package markdown-mode
   :ensure t
+  :defer t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
 (use-package grip-mode
   :ensure t
-  :hook ((markdown-mode . grip-mode)))
+  :hook (markdown-mode . grip-mode))
+
 (use-package yaml-mode
   :ensure t
+  :defer t
   :mode "\\.yml\\'" "\\.yaml\\'")
 
 ;; Enable Flycheck
 (use-package flycheck
   :ensure t
+  :defer t
   :init (global-flycheck-mode))
 
 ;; LSP Mode
@@ -347,14 +337,14 @@
   :commands (lsp lsp-deferred)
   :hook ((rust-mode . lsp-deferred)
          (nix-mode . lsp-deferred)
-	 (sh-mode . enable-lsp-in-sh-mode)
-	 (dockerfile-mode . lsp-deferred)
-	 (terraform-mode . lsp-deferred)
-	 (yaml-mode . lsp-deferred))
+         (sh-mode . enable-lsp-in-sh-mode)
+         (dockerfile-mode . lsp-deferred)
+         (terraform-mode . lsp-deferred)
+         (yaml-mode . lsp-deferred))
   :config
-    (setq lsp-rust-analyzer-cargo-watch-command "clippy")
-    (setq lsp-rust-analyzer-server-display-inlay-hints t)
-    (setq lsp-completion-enable nil))
+  (setq lsp-rust-analyzer-cargo-watch-command "clippy"
+        lsp-rust-analyzer-server-display-inlay-hints t
+        lsp-completion-enable nil))
 
 ;; LSP UI
 (use-package lsp-ui
@@ -366,9 +356,10 @@
 ;; Pyright
 (use-package lsp-pyright
   :ensure t
+  :defer t
   :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp-deferred))))
+                         (require 'lsp-pyright)
+                         (lsp-deferred))))
 
 (provide 'init)
 ;;; init.el ends here
